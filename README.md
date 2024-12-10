@@ -79,6 +79,3 @@ https://progweb-todo-api.onrender.com
 ## Contributions
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir des *issues* ou à proposer des *pull requests* pour améliorer ce projet.
-``` 
-
-Ce *README* offre une présentation claire et complète du projet, adaptée à un dépôt GitHub. Si des ajustements sont nécessaires, je suis disponible pour peaufiner !
