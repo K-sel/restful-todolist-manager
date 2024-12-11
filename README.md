@@ -1,70 +1,70 @@
-# Application Todo Multi-Utilisateur
+# Multi-User Todo Application
 
-Cette application front-end Todo permet à plusieurs utilisateurs de gérer leurs tâches en ligne grâce à une API REST. Ce projet a été conçu pour approfondir les compétences en programmation web, avec une forte emphase sur la programmation asynchrone, la sécurité des échanges client-serveur, et les bonnes pratiques de développement.
+This front-end Todo application allows multiple users to manage their tasks online via a REST API. The project was designed to deepen web programming skills, emphasizing asynchronous programming, secure client-server exchanges, and development best practices.
 
-## Fonctionnalités principales
+## Key Features
 
-- **Inscription et authentification sécurisée via JWT**
-- **Ajout, affichage et suppression de tâches**
-- **Gestion des requêtes HTTP avec `async/await`**
-- **Respect des principes RESTful pour les communications réseau**
+- **Secure registration and authentication via JWT**
+- **Add, view, and delete tasks**
+- **Handle HTTP requests with `async/await`**
+- **Adherence to RESTful principles for network communication**
 
-## Objectifs pédagogiques
+## Learning Objectives
 
-- Comprendre et appliquer les concepts de la programmation asynchrone en JavaScript
-- Manipuler des API REST avec des requêtes HTTP (GET, POST, DELETE)
-- Gérer des opérations sécurisées avec les JSON Web Tokens (JWT)
-- Créer des interfaces utilisateurs réactives pour des applications web interactives
-- Renforcer les compétences en gestion d’erreurs et en optimisation du code
+- Understand and apply asynchronous programming concepts in JavaScript
+- Interact with REST APIs using HTTP requests (GET, POST, DELETE)
+- Manage secure operations with JSON Web Tokens (JWT)
+- Create responsive user interfaces for interactive web applications
+- Strengthen skills in error handling and code optimization
 
-## Technologies utilisées
+## Technologies Used
 
 - **JavaScript (ES6+)**
 - **HTML5 / CSS3**
 - **Fetch API**
-- **JSON pour les échanges de données**
-- **Postman pour tester les requêtes API**
+- **JSON for data exchange**
+- **Postman for API request testing**
 
-## API utilisée
+## API Used
 
-L'application interagit avec une API REST disponible à l'adresse suivante :
-```
+The application interacts with a REST API available at:
+
 https://progweb-todo-api.onrender.com
-```
 
-### Endpoints principaux
 
-- **POST** `/auth/register` : inscription des utilisateurs
-- **POST** `/auth/login` : connexion des utilisateurs
-- **GET** `/todos` : récupérer la liste des tâches
-- **POST** `/todos` : créer une nouvelle tâche
-- **DELETE** `/todos/:id` : supprimer une tâche
+### Main Endpoints
 
-## Guide d’utilisation
+- **POST** `/auth/register`: Register users
+- **POST** `/auth/login`: Log in users
+- **GET** `/todos`: Retrieve the task list
+- **POST** `/todos`: Create a new task
+- **DELETE** `/todos/:id`: Delete a task
 
-1. **Inscription et connexion :**
-   - Créez un compte avec une adresse e-mail et un mot de passe.
-   - Connectez-vous pour accéder à vos tâches.
+## User Guide
 
-2. **Gestion des tâches :**
-   - Ajoutez de nouvelles tâches via le formulaire dédié.
-   - Visualisez les tâches déjà créées.
-   - Supprimez les tâches obsolètes.
+1. **Registration and Login:**
+   - Create an account with an email and password.
+   - Log in to access your tasks.
 
-## Points forts techniques
+2. **Task Management:**
+   - Add new tasks using the dedicated form.
+   - View tasks already created.
+   - Delete outdated tasks.
 
-- **Asynchronisme simplifié avec `async/await` :** Permet une gestion fluide des requêtes réseau.
-- **JWT pour la sécurité :** Garantit une authentification sécurisée et maintient la confidentialité des données utilisateur.
-- **Respect des normes REST :** Assure des échanges structurés et cohérents entre le client et le serveur.
+## Technical Highlights
 
-## Ressources supplémentaires
+- **Simplified Asynchronous Operations with `async/await`:** Ensures smooth handling of network requests.
+- **JWT for Security:** Provides secure authentication and maintains user data confidentiality.
+- **REST Standards Compliance:** Ensures structured and consistent exchanges between client and server.
 
-- [Documentation de l'API (Swagger)](https://progweb-todo-api.onrender.com/swagger)
-- [Principes de l'architecture REST](https://developer.mozilla.org/fr/docs/Glossary/REST)
-- [Guide JSON Web Tokens (JWT)](https://jwt.io/)
+## Additional Resources
+
+- [API Documentation (Swagger)](https://progweb-todo-api.onrender.com/swagger)
+- [REST Architecture Principles](https://developer.mozilla.org/en-US/docs/Glossary/REST)
+- [JSON Web Tokens (JWT) Guide](https://jwt.io/)
 
 ---
 
 ## Contributions
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir des *issues* ou à proposer des *pull requests* pour améliorer ce projet.
+Contributions are welcome! Feel free to open issues or propose pull requests to improve this project.
