@@ -144,6 +144,7 @@ const fetchTodos = async () => {
 
     // Analyse de la réponse du serveur
     let data = await response.json();
+    console.log(data);
 
     //Si les todos ont été trouvé, on les affiche avec la méthode displayTodos
     if(response.status === 200){
@@ -161,21 +162,19 @@ const fetchTodos = async () => {
 // Méthode permettant d'afficher les todos, utilise la délégation d'évenements
 // Prends en paramètres un tableau d'objets todos (de fetchTodos)
 const displayTodos = (todos) => {
-  let id = 1;
   todos.forEach((el) => {
     let li = document.createElement("li");
     li.innerHTML = `
 	        <p class="body">${el.body}</p>
 	        <p class="tags">${el.tags}</p>
 	        <div class="delete"></div>`;
-    li.setAttribute("id", `todo-${id}`);
+    li.setAttribute("id", `${el.id}`);
     document.querySelector("ul").append(li);
-    id++;
   });
 };
 
 // Méthode de pour supprimer les todos dans le backend et dans le DOM
-// CETTE METHODE NE FONCTIONNE PAS ENCORE JE SUIS ACTUELLEMENT EN TRAIN DE LA DEBUGGER
+// CETTE METHODE NE FONCTIONNE PAS JE SOUPCONNE UN PROBLEME DANS L'API
 const deleteTodo = async (id, HTMLelement) => {
   const options = {
     method: "DELETE",
@@ -186,10 +185,7 @@ const deleteTodo = async (id, HTMLelement) => {
   };
 
   try {
-    let response = await fetch(
-      `https://progweb-todo-api.onrender.com/todos/${id}`,
-      options
-    );
+    let response = await fetch(`https://progweb-todo-api.onrender.com/todos/${id}`, options);
 
     // Analyse de la réponse du serveur
     let data = await response.json();
@@ -294,6 +290,7 @@ const initEventListeners = () => {
     e.preventDefault();
     const formData = new FormData(formTodo);
     createTodo(formData);
+    formTodo.reset();
   });
 
   document.body.addEventListener("click", (e) => {
