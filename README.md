@@ -25,17 +25,6 @@ Cette application front-end Todo permet à plusieurs utilisateurs de gérer leur
 - **JSON pour les échanges de données**
 - **Postman pour tester les requêtes API**
 
-## Installation et configuration
-
-1. **Cloner le dépôt :**
-   ```bash
-   git clone <lien-du-repo>
-   cd <nom-du-repo>
-   ```
-
-2. **Lancer l’application :**
-   Ouvrez le fichier `index.html` dans votre navigateur.
-
 ## API utilisée
 
 L'application interagit avec une API REST disponible à l'adresse suivante :
