@@ -147,7 +147,7 @@ const fetchTodos = async () => {
     console.log(data);
 
     //Si les todos ont été trouvé, on les affiche avec la méthode displayTodos
-    if(response.status === 200){
+    if (response.status === 200) {
       displayTodos(data.todos);
     }
     //De plus, on affiche le message de statut
@@ -162,6 +162,7 @@ const fetchTodos = async () => {
 // Méthode permettant d'afficher les todos, utilise la délégation d'évenements
 // Prends en paramètres un tableau d'objets todos (de fetchTodos)
 const displayTodos = (todos) => {
+  document.querySelector("ul").replaceChildren();
   todos.forEach((el) => {
     let li = document.createElement("li");
     li.innerHTML = `
@@ -174,19 +175,23 @@ const displayTodos = (todos) => {
 };
 
 // Méthode de pour supprimer les todos dans le backend et dans le DOM
-// CETTE METHODE NE FONCTIONNE PAS JE SOUPCONNE UN PROBLEME DANS L'API
 const deleteTodo = async (id, HTMLelement) => {
+  const body = JSON.stringify({ body: null });
   const options = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : `Bearer ${localStorage.getItem("token")}`,
-    }
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body,
   };
 
   try {
-    let response = await fetch(`https://progweb-todo-api.onrender.com/todos/${id}`, options);
-
+    let response = await fetch(
+      `https://progweb-todo-api.onrender.com/todos/${id}`,
+      options
+    );
+    // console.log(await response.text())
     // Analyse de la réponse du serveur
     let data = await response.json();
 
@@ -209,37 +214,41 @@ const deleteTodo = async (id, HTMLelement) => {
 // Si l'ajout a réussi (status 200) on refresh les todos via fetchTodos()
 const createTodo = async (formData) => {
   let todo = Object.fromEntries(formData);
+  if (todo.body) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(todo),
+    };
 
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: JSON.stringify(todo),
-  };
+    try {
+      let response = await fetch(
+        "https://progweb-todo-api.onrender.com/todos/",
+        options
+      );
 
-  try {
-    let response = await fetch(
-      "https://progweb-todo-api.onrender.com/todos/",
-      options
-    );
+      // Analyse de la réponse du serveur
+      let data = await response.json();
 
-    // Analyse de la réponse du serveur
-    let data = await response.json();
+      if (response.status === 201) {
+        fetchTodos();
+      }
+      // Affichage du message renvoyé par le serveur
+      displayMessage(data.message);
 
-    if (response.status === 201) {
-      fetchTodos();
+      // Retour des données de réponse
+      return data;
+
+      // Gestion des erreurs potentielles
+    } catch (e) {
+      console.error(`${e.message}`);
     }
-    // Affichage du message renvoyé par le serveur
-    displayMessage(data.message);
+  } else {
+    displayMessage("Impossible de poster un todo vide.");
 
-    // Retour des données de réponse
-    return data;
-
-    // Gestion des erreurs potentielles
-  } catch (e) {
-    console.error(`${e.message}`);
   }
 };
 
@@ -256,48 +265,37 @@ const initEventListeners = () => {
   formSignUp.addEventListener("submit", (e) => {
     e.preventDefault(); // Empêche la soumission par défaut du formulaire
     const formData = new FormData(formSignUp); // Collecte des données du formulaire
-
-    // Création de l'utilisateur et journalisation de la réponse
-    createUser(formData).then((res) => console.log(res));
-
-    // Réinitialisation du formulaire d'inscription
-    formSignUp.reset();
+    createUser(formData) // Création de l'utilisateur et journalisation de la réponse
+    formSignUp.reset(); // Réinitialisation du formulaire d'inscription
   });
 
   // Gestion de la soumission du formulaire de connexion
   formLogin.addEventListener("submit", (e) => {
-    // Empêche la soumission par défaut du formulaire
-    e.preventDefault();
-
-    // Collecte des données du formulaire
-    const formData = new FormData(formLogin);
-
-    // Tentative de connexion de l'utilisateur
-    login(formData);
-
-    // Réinitialisation du formulaire de connexion
-    formLogin.reset();
+    e.preventDefault(); // Empêche la soumission par défaut du formulaire
+    const formData = new FormData(formLogin); // Collecte des données du formulaire
+    login(formData); // Tentative de connexion de l'utilisateur
+    formLogin.reset(); 
   });
 
   // Gestion du clic sur le bouton de déconnexion
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("token"); // Suppression du jeton d'authentification
     handleInterfaceAuth(); // Mise à jour de l'interface pour l'état non authentifié
-    displayMessage("Logged out successfully");
+    displayMessage("Logged out successfully"); //Affichage utilisateur
   });
 
   formTodo.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const formData = new FormData(formTodo);
-    createTodo(formData);
-    formTodo.reset();
+    e.preventDefault(); // Empêche la soumission par défaut du formulaire
+    const formData = new FormData(formTodo);  // Collecte des données du formulaire
+    createTodo(formData); // Création de la tâche
+    formTodo.reset(); // Réinitialisation du formulaire de connexion
   });
 
   document.body.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete")) {
-      let id = e.target.parentElement.attributes[0].value;
-      let HTMLelement = e.target.parentElement;
-      deleteTodo(id, HTMLelement);
+      let id = e.target.parentElement.attributes[0].value; // Obtention de l'id
+      let HTMLelement = e.target.parentElement; // Obtention de l'élément HTML de la tâche
+      deleteTodo(id, HTMLelement); // Tentative de suppression de la tâche dans API et DOM
     }
   });
 };
@@ -307,7 +305,7 @@ const initEventListeners = () => {
 const pageLoad = () => {
   handleInterfaceAuth(); // Vérification et définition de l'état d'authentification initial
   initEventListeners(); // Configuration de tous les écouteurs d'événements
-  if(isAuthenticated()){
+  if (isAuthenticated()) {
     fetchTodos();
   }
 };
