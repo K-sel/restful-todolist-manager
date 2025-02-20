@@ -1,5 +1,9 @@
 # Multi-User Todo Application
+## Demo login
+mail : ksel@demo.com
+pwd : 12345
 
+## Intro
 This front-end Todo application allows multiple users to manage their tasks online via a REST API. The project was designed to deepen web programming skills, emphasizing asynchronous programming, secure client-server exchanges, and development best practices.
 
 ## Key Features
